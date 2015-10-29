@@ -3,11 +3,8 @@ import numpy as np
 from pylab import *
 
 numEpisodes = 2000
-
-def policy(s):
-    return np.random.randint(2)
-
 returnSum = 0.0
+
 for episodeNum in range(numEpisodes):
     G = 0
     s = bj.init()
