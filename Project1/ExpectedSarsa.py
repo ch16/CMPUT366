@@ -20,7 +20,6 @@ def actionProb(e,a,s):
         return e/num_actions
 
 
-
 Q =  0.00001*np.random.rand(num_states,num_actions)
 
 for episodeNum in range(numEpisodes):
@@ -36,7 +35,28 @@ for episodeNum in range(numEpisodes):
 
     returnSum = returnSum + G
 
-    if episodeNum%10000 == 0:
+    if episodeNum > 0 and episodeNum%10000 == 0:
         print "Episode: ", episodeNum, "Return: ", G
-        print "Average return: ", returnSum/numEpisodes
+        print "Average return: ", returnSum/episodeNum
     
+def learnedPolicy(s):
+    return argmax(Q[s])
+
+bj.printPolicy(learnedPolicy)
+
+returnSum = 0.0
+
+for episodeNum in range(numEpisodes):
+    G = 0
+
+    s = bj.init()
+    while s != -1:
+        r, s = bj.sample(s,learnedPolicy(s))
+        G+=r
+
+    returnSum = returnSum + G
+
+    if episodeNum > 0 and episodeNum%10000 == 0:
+        print "Episode: ", episodeNum, "Return: ", G
+        print "Average return: ", returnSum/episodeNum
+
