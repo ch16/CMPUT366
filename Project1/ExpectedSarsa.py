@@ -11,7 +11,7 @@ num_actions = 2
 alpha = 0.001
 
 e_behavior = 0.01
-e_target= 0.01
+e_target= 0
 
 def actionProb(e,a,s):
     if np.argmax(Q[s]) == a:
@@ -35,9 +35,9 @@ for episodeNum in range(numEpisodes):
 
     returnSum = returnSum + G
 
-    if episodeNum > 0 and episodeNum%10000 == 0:
-        print "Episode: ", episodeNum, "Return: ", G
-        print "Average return: ", returnSum/episodeNum
+    if episodeNum%10000 == 0:
+        print "Episode: ", episodeNum
+        print "Average return: ", returnSum/(episodeNum+1)
     
 def learnedPolicy(s):
     return argmax(Q[s])
@@ -56,7 +56,7 @@ for episodeNum in range(numEpisodes):
 
     returnSum = returnSum + G
 
-    if episodeNum > 0 and episodeNum%10000 == 0:
-        print "Episode: ", episodeNum, "Return: ", G
-        print "Average return: ", returnSum/episodeNum
+    if episodeNum%10000 == 0:
+        print "Episode: ", episodeNum
+        print "Average return: ", returnSum/(episodeNum+1)
 
