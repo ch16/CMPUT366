@@ -121,6 +121,35 @@ H H H S H H H H H H 12
 
 
 
+0.8	0.01	0.0005	-0.03480	2000000
+
+ Usable Ace:
+S S S S S S S S S S 20
+S S S S S S S S S S 19
+S S S S S S S S S S 18
+S S S S S S S S S H 17
+H H H H S H H H H H 16
+H H H H H H H H H H 15
+H H H H S H H H H H 14
+H H H S H H H H H H 13
+H H H H S H H H H H 12
+1 2 3 4 5 6 7 8 9 10
+
+ No Usable Ace:
+S S S S S S S S S S 20
+S S S S S S S S S S 19
+S S S S S S S S S S 18
+S S S S S S S S S S 17
+H S S S S S H H H H 16
+H S S S S H H H H H 15
+H H S S S H H H H H 14
+H H S S S H H H H H 13
+H H H H S H H H H H 12
+1 2 3 4 5 6 7 8 9 10
+
+
+
+
 
 Emu	Epi	Alpha	Ave Return	Num of Episodes
 0.1	0.01	0.001	-0.03692	1000000
@@ -135,5 +164,5 @@ Emu	Epi	Alpha	Ave Return	Num of Episodes
 0.9	0.01	0.001	-0.0398		1000000
 0.8	0.01	0.001	-0.03799	2000000
 0.7	0.01	0.001	-0.03530	2000000
-
+0.8	0.01	0.0005	-0.03480	2000000
 
