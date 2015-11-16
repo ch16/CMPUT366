@@ -1,3 +1,10 @@
+#---------------------------------------------------------------
+# Assignment:       Project1
+# Due Date:         Nov 5, 2015
+# Names:            Mujda Abbasi - Zainab Alsharif
+# Student ID:         1298314         1223455
+#---------------------------------------------------------------
+
 import blackjack as bj
 import numpy as np
 from pylab import *
