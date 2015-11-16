@@ -1,4 +1,5 @@
 #---------------------------------------------------------------
+# Course:           CMPUT 366
 # Assignment:       Project1
 # Due Date:         Nov 5, 2015
 # Names:            Mujda Abbasi - Zainab Alsharif
