@@ -1,0 +1,13 @@
+the tiles in the second tiling will run from 121 to 241 (why?)
+
+(0.1,0.1), will be in the first tile of the first seven tilings, that is, in tiles 0, 121, 242, 363, 484, 605, 726 (why?)
+
+In the eighth tiling  this  point  will  be  in  the  13th  tile  (why?)
+
+which  is  tile  859  (why?)
+
+The largest possible tile index is 967 (why?)
+
+
+the second and fourthexamples should produce very similar sets of indices (they should have many tiles in common) (why?)
+
