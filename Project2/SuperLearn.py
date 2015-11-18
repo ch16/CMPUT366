@@ -2,7 +2,7 @@ from pylab import zeros, sin, cos, normal, random
 from Tilecoder import numTilings, tilecode
  
 	# initialize weights appropriately here
-weights=[0]*numTilings*121
+weights=[0.0]*numTilings*121
 	# initialize step size parameter appropriately here
 alpha=0.1/numTilings	
 	# initialize your global list of tile indices here
@@ -72,3 +72,6 @@ def test2():
 		train(1000)
 		MSE(10000)
 	writeF('f10000')
+
+#test1()
+test2()

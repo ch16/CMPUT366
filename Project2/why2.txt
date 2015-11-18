@@ -1,0 +1,5 @@
+The before value ofthe fourth point should be nonzero (why?)
+
+
+You should see the MSE coming down smoothly from about 0.25 to almost 0.01 andstaying there (why does it not decrease further towards zero?)
+
