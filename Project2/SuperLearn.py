@@ -8,10 +8,12 @@ alpha=0.1/numTilings
 	# initialize your global list of tile indices here
 tileIndices = [-1]*numTilings
 	 
+
+
 def f(x,y):
 	# write your linear function approximator here (5 lines or so)
 	tilecode(x,y,tileIndices)
-	sum = 0
+	sum = 0.0
 	for i in tileIndices:
 		sum+=weights[i]
 	return sum
@@ -20,7 +22,7 @@ def learn(x,y,target):
 	# write your gradient descent learning algorithm here (3 lines or so)
 	tilecode(x,y,tileIndices)
 	for i in tileIndices:
-		weights[i]=weights[i]+alpha*(target-f(x,y))
+		weights[i]+=alpha*(target-f(x,y))
  
 def test1():
    for x,y,target in \
@@ -73,5 +75,5 @@ def test2():
 		MSE(10000)
 	writeF('f10000')
 
-#test1()
-test2()
+test1()
+#test2()
