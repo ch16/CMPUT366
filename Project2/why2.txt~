@@ -1,6 +1,6 @@
 The before value of the fourth point should be nonzero (why?)
 
-This is because the fourth point shares indices in 6 of the tilings with the second point. Since the second point already had some learning done for those indices, the weights corresponding to them would not be zero when we come to the fourth point, therefore the calculation for the before value of the fourth point involves nonzero weights for six of the indices.
+This is because the fourth point shares indices in 6 of the tiilings with the second point. Since the second point already had some learning done for those indices, the weights corresponding to them would not be zero when we come to the fourth point, therefore the calculation for the before value of the fourth point involves nonzero weights for six of the indices.
 
 
 You should see the MSE coming down smoothly from about 0.25 to almost 0.01 and staying there (why does it not decrease further towards zero?)
