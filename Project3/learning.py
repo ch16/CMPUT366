@@ -5,7 +5,7 @@ from Tilecoder import numTiles as n
 from pylab import *  #includes numpy
 
 numRuns = 1
-numEpisodes = 200
+numEpisodes = 1
 numActions = 3
 alpha = 0.5/numTilings
 gamma = 1
@@ -16,7 +16,7 @@ F = [-1]*numpy.ones(numTilings)
 
 runSum = 0.0
 for run in xrange(numRuns):
-    theta = -0.01*numpy.random.rand(n)
+    theta = 0.01*numpy.random.rand(n)
     Q=numpy.zeros(numActions)
     returnSum = 0.0
     for episodeNum in xrange(numEpisodes):
@@ -24,24 +24,26 @@ for run in xrange(numRuns):
         e=numpy.zeros(n)
         #your code goes here (20-30 lines, depending on modularity)
         s = mc.init()
-        while 1:
-	    print 'ha'
+        while s != None:
+            print Q
             tilecode(s[0],s[1],F)
             for a in range(3):
-		for i in F:
+                for i in F:
                     Q[a]+= theta[i+a*324]
             a = numpy.argmax(Q)
             r, s1 = mc.sample(s,a)
+            G+=r
             delta=r-Q[a]
-            for i in F:
-                e[i]=1
+            for a in range(3):
+                for i in F:
+                    e[i]=1
             if s1 == None:
                 for i in range(n):
                     theta[i]=theta[i]+alpha*delta*e[i]
                 break
             tilecode(s[0],s[1],F)
             for a in range(3):
-		for i in F:
+                for i in F:
                     Q[a]+= theta[i+a*324]
             delta=delta+numpy.max(Q)
             for i in range(n):
@@ -49,7 +51,7 @@ for run in xrange(numRuns):
                 e[i]=lmbda*e[i]
             s = s1
         
-
+    
         print "Episode: ", episodeNum, "Steps:", step, "Return: ", G
         returnSum = returnSum + G
     print "Average return:", returnSum/numEpisodes
