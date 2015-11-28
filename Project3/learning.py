@@ -12,39 +12,42 @@ gamma = 1
 lmbda = 0.9
 Epi = Emu = epsilon = 0
 n = numTilings * numTiles * numActions
-F = [-1]*numTilings
+F = [-1]*numpy.ones(numTilings)
 
 runSum = 0.0
 for run in xrange(numRuns):
-    theta = -0.01*rand(n)
+    theta = -0.01*numpy.random.rand(n)
     Q=numpy.zeros(numActions)
     returnSum = 0.0
     for episodeNum in xrange(numEpisodes):
         G = 0
-        e=[0]*n
+        e=numpy.zeros(n)
         #your code goes here (20-30 lines, depending on modularity)
         s = mc.init()
-        tilecode(s[0],s[1],F)
-        for a in range(3):
-	    for i in F:
-	        Q[a]+= theta[i+a*324]
-        a = numpy.argmax(Q)
-        r, s1 = mc.sample(s,a)
-        delta=r-Q[a]
-        for i in F:
-    	    e[i]=1
-        if s1 == None:
-	    for i in range(n):
-	        theta[i]=theta[i]+alpha*delta*e[i]
-	    break
-        for a in range(3):
-	    for i in F:
-	        Q[a]+= theta[i+a*324]
-        delta=delta+numpy.max(Q)
-        for i in range(n):
-	    theta[i]=theta[i]+alpha*delta*e[i]
-            e[i]=lmbda*e[i]      
-        s = s1
+        while 1:
+	    print 'ha'
+            tilecode(s[0],s[1],F)
+            for a in range(3):
+		for i in F:
+                    Q[a]+= theta[i+a*324]
+            a = numpy.argmax(Q)
+            r, s1 = mc.sample(s,a)
+            delta=r-Q[a]
+            for i in F:
+                e[i]=1
+            if s1 == None:
+                for i in range(n):
+                    theta[i]=theta[i]+alpha*delta*e[i]
+                break
+            tilecode(s[0],s[1],F)
+            for a in range(3):
+		for i in F:
+                    Q[a]+= theta[i+a*324]
+            delta=delta+numpy.max(Q)
+            for i in range(n):
+                theta[i]=theta[i]+alpha*delta*e[i]
+                e[i]=lmbda*e[i]
+            s = s1
         
 
         print "Episode: ", episodeNum, "Steps:", step, "Return: ", G
