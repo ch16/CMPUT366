@@ -5,7 +5,7 @@ from Tilecoder import numTiles as n
 from pylab import *  #includes numpy
 
 numRuns = 1
-numEpisodes = 1
+numEpisodes = 200
 numActions = 3
 alpha = 0.5/numTilings
 gamma = 1
@@ -16,16 +16,15 @@ F = [-1]*numpy.ones(numTilings)
 
 runSum = 0.0
 for run in xrange(numRuns):
-    theta = 0.01*numpy.random.rand(n)
-    Q=numpy.zeros(numActions)
+    theta = 0*numpy.random.rand(n)
     returnSum = 0.0
     for episodeNum in xrange(numEpisodes):
         G = 0
-        e=numpy.zeros(n)
         #your code goes here (20-30 lines, depending on modularity)
+        e=numpy.zeros(n)
         s = mc.init()
+        Q=numpy.zeros(numActions)
         while s != None:
-            print Q
             tilecode(s[0],s[1],F)
             for a in range(3):
                 for i in F:
@@ -34,20 +33,20 @@ for run in xrange(numRuns):
             r, s1 = mc.sample(s,a)
             G+=r
             delta=r-Q[a]
-            for a in range(3):
-                for i in F:
-                    e[i]=1
+            for i in F:
+                    e[i+a*324]=1
             if s1 == None:
                 for i in range(n):
-                    theta[i]=theta[i]+alpha*delta*e[i]
+                    theta[i]+=alpha*delta*e[i]
                 break
             tilecode(s[0],s[1],F)
+            Q=numpy.zeros(numActions)
             for a in range(3):
                 for i in F:
                     Q[a]+= theta[i+a*324]
             delta=delta+numpy.max(Q)
             for i in range(n):
-                theta[i]=theta[i]+alpha*delta*e[i]
+                theta[i]+=alpha*delta*e[i]
                 e[i]=lmbda*e[i]
             s = s1
         
