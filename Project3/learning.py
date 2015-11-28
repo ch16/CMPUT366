@@ -16,16 +16,20 @@ F = [-1]*numpy.ones(numTilings)
 
 runSum = 0.0
 for run in xrange(numRuns):
-    theta = 0*numpy.random.rand(n)
+    theta = -0.001*numpy.random.rand(n)
     returnSum = 0.0
     for episodeNum in xrange(numEpisodes):
         G = 0
+        step=0
         #your code goes here (20-30 lines, depending on modularity)
         e=numpy.zeros(n)
         s = mc.init()
         Q=numpy.zeros(numActions)
         while s != None:
+            #print Q
+            step+=1
             tilecode(s[0],s[1],F)
+            Q=numpy.zeros(numActions)
             for a in range(3):
                 for i in F:
                     Q[a]+= theta[i+a*324]
