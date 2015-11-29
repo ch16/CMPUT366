@@ -4,8 +4,8 @@ from Tilecoder import numTilings, tilecode, numTiles
 from Tilecoder import numTiles as n
 from pylab import *  #includes numpy
 
-numRuns = 1
-numEpisodes = 20
+numRuns = 2
+numEpisodes = 200
 numActions = 3
 alpha = 0.5/numTilings
 gamma = 1
@@ -13,6 +13,8 @@ lmbda = 0.9
 Epi = Emu = epsilon = 0
 n = numTilings * numTiles * numActions
 F = [-1]*numpy.ones(numTilings)
+stepsArray = numpy.zeros(numRuns*numEpisodes)
+returnsArray = numpy.zeros(numRuns*numEpisodes)
 
 def Qs(F):
     Q=numpy.zeros(numActions)
@@ -57,15 +59,26 @@ for run in xrange(numRuns):
         
         print "Episode: ", episodeNum, "Steps:", step, "Return: ", G
         returnSum = returnSum + G
+        stepsArray[run*numEpisodes+episodeNum]=step
+        returnsArray[run*numEpisodes+episodeNum]=(runSum+returnSum)/(run*numEpisodes+episodeNum+1)
     print "Average return:", returnSum/numEpisodes
     runSum += returnSum
+    
 print "Overall performance: Average sum of return per run:", runSum/numRuns
 
 
 #Additional code here to write average performance data to files for plotting...
 #You will first need to add an array in which to collect the data
-
-
+def writePerfData():
+    fret = open('avgret.dat', 'w')
+    fstep = open('steps.dat', 'w')
+    for i in range(numRuns*numEpisodes):
+        fret.write(repr(i) + '	' + repr(returnsArray[i]))
+        fstep.write(repr(i) + '	' + repr(stepsArray[i]))
+        fret.write('\n')
+        fstep.write('\n')
+    fret.close()
+    fstep.close()
 
 def writeF():
     fout = open('value', 'w')
@@ -79,4 +92,5 @@ def writeF():
         fout.write('\n')
     fout.close()
 
-writeF()
+#writeF()
+writePerfData()
