@@ -4,7 +4,7 @@ from Tilecoder import numTilings, tilecode, numTiles
 from Tilecoder import numTiles as n
 from pylab import *  #includes numpy
 
-numRuns = 2
+numRuns = 50
 numEpisodes = 200
 numActions = 3
 alpha = 0.5/numTilings
