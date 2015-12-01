@@ -13,8 +13,8 @@ lmbda = 0.9
 Epi = Emu = epsilon = 0
 n = numTilings * numTiles * numActions
 F = [-1]*numpy.ones(numTilings)
-stepsArray = numpy.zeros(numRuns*numEpisodes)
-returnsArray = numpy.zeros(numRuns*numEpisodes)
+stepsArray = numpy.zeros(numEpisodes)
+returnsArray = numpy.zeros(numEpisodes)
 
 def Qs(F):
     Q=numpy.zeros(numActions)
@@ -30,13 +30,13 @@ for run in xrange(numRuns):
     for episodeNum in xrange(numEpisodes):
         G = 0
         #your code goes here (20-30 lines, depending on modularity)
-        step=0
+        steps=0
         e=numpy.zeros(n)
         s = mc.init()
         Q=numpy.zeros(numActions)
         while s != None:
             #print Q
-            step+=1
+            steps+=1
             tilecode(s[0],s[1],F)
             Q=Qs(F)
             a = numpy.argmax(Q)
@@ -57,11 +57,11 @@ for run in xrange(numRuns):
                 e[i]=lmbda*e[i]
             s = s1
         
-        print "Episode: ", episodeNum, "Steps:", step, "Return: ", G
+        print "Episode: ", episodeNum, "Steps:", steps, "Return: ", G
         returnSum = returnSum + G
-        stepsArray[run*numEpisodes+episodeNum]=step
-        returnsArray[run*numEpisodes+episodeNum]=(runSum+returnSum)/(run*numEpisodes+episodeNum+1)
-    print "Average return:", returnSum/numEpisodes
+        stepsArray[episodeNum]+=steps
+        returnsArray[episodeNum]+=G
+    print "Run:", run, "Average return:", returnSum/numEpisodes
     runSum += returnSum
     
 print "Overall performance: Average sum of return per run:", runSum/numRuns
@@ -72,9 +72,9 @@ print "Overall performance: Average sum of return per run:", runSum/numRuns
 def writePerfData():
     fret = open('avgret.dat', 'w')
     fstep = open('steps.dat', 'w')
-    for i in range(numRuns*numEpisodes):
-        fret.write(repr(i) + '	' + repr(returnsArray[i]))
-        fstep.write(repr(i) + '	' + repr(stepsArray[i]))
+    for i in range(numEpisodes):
+        fret.write(repr(i) + '	' + repr(returnsArray[i]/numRuns))
+        fstep.write(repr(i) + '	' + repr(stepsArray[i]/numRuns))
         fret.write('\n')
         fstep.write('\n')
     fret.close()
